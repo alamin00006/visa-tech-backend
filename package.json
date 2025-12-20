@@ -3,10 +3,10 @@
   "version": "1.0.0",
   "main": "dist/app.js",
   "scripts": {
-    "dev": "ts-node-dev --respawn --transpile-only src/app.ts",
+    "dev": "node api.js && ts-node-dev --respawn --transpile-only src/app.ts",
     "clean": "rimraf dist",
     "build": "npm run clean && tsc",
-    "start": "node dist/app.js",
+    "start": "node api.js && node dist/app.js",
     "lint:check": "eslint .",
     "lint:fix": "eslint . --fix",
     "prettier:check": "prettier --check .",

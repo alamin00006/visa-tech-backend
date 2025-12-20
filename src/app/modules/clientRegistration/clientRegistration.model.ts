@@ -26,6 +26,7 @@ const clientRegistrationSchema = new Schema<IClientRegistration>(
       lowercase: true,
       trim: true,
       match: [/^\S+@\S+\.\S+$/, 'Please use a valid email address'],
+      default: null,
     },
     role: {
       type: String,
@@ -43,10 +44,12 @@ const clientRegistrationSchema = new Schema<IClientRegistration>(
     whatsapp: {
       type: String,
       trim: true,
+      default: null,
     },
     location: {
       type: String,
       trim: true,
+      default: null,
     },
 
     status: {

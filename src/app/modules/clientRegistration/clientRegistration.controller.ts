@@ -9,14 +9,6 @@ const createClientRegistration = catchAsync(async (req, res) => {
   const result =
     await clientRegistrationService.createClientRegistration(payload)
 
-  if (result instanceof Error) {
-    return sendResponse(res, {
-      statusCode: httpStatus.BAD_REQUEST,
-      success: false,
-      message: result.message,
-    })
-  }
-
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,

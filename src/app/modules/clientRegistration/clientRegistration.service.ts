@@ -4,12 +4,23 @@ import { IClientRegistration } from './clientRegistration.interface'
 import { ClientRegistration } from './clientRegistration.model'
 import httpStatus from 'http-status'
 const createClientRegistration = async (payload: IClientRegistration) => {
-  const isExist = await ClientRegistration.findOne({
-    $or: [
-      payload.email ? { email: payload.email } : {},
-      payload.mobile ? { mobile: payload.mobile } : {},
-    ],
-  })
+  const orConditions = []
+
+  if (payload.email) {
+    orConditions.push({ email: payload.email })
+  }
+
+  if (payload.mobile) {
+    orConditions.push({ mobile: payload.mobile })
+  }
+
+  let isExist = null
+
+  if (orConditions.length > 0) {
+    isExist = await ClientRegistration.findOne({
+      $or: orConditions,
+    })
+  }
 
   if (isExist) {
     throw new ApiError(
@@ -20,6 +31,7 @@ const createClientRegistration = async (payload: IClientRegistration) => {
 
   const user = await ClientRegistration.create(payload)
   const token = jwtHelpers.generateToken(user)
+
   return { token, user }
 }
 
