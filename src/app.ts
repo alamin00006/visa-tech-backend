@@ -14,7 +14,13 @@ const server = http.createServer(app)
 // ============================
 // Allowed Origins
 // ============================
-const allowedOrigins = ['http://localhost:3000']
+const allowedOrigins = [
+  'https://visa-tech-frontend.vercel.app',
+  'https://visa-tech-frontend.onrender.com',
+  'http://localhost:3000',
+]
+
+// https://visa-tech-backend.onrender.com/api/v1/client-submission
 
 // ============================
 // Middleware
