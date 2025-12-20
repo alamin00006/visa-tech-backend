@@ -6,11 +6,11 @@ export type TClientStatus = 'active' | 'inactive'
 export interface IClientRegistration {
   id: string
   name: string
-  email?: string
+  email?: string | null
   role: string
   mobile: string
-  whatsapp?: string
-  location?: string
+  whatsapp?: string | null
+  location?: string | null
   status?: TClientStatus
 }
 
