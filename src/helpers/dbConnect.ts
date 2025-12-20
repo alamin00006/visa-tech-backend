@@ -1,27 +1,25 @@
 import mongoose from 'mongoose'
-import config from '../config'
 
-mongoose.set('strictQuery', false)
-
-// MongoDB connection options
-const mongooseOptions = {
+const options = {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
   serverSelectionTimeoutMS: 5000,
   autoIndex: true,
   maxPoolSize: 10,
+
   socketTimeoutMS: 45000,
   family: 4,
 }
 
-export const databaseConnect = async (server: any) => {
-  try {
-    await mongoose.connect(config.database_url as string, mongooseOptions)
-    console.log('🛢 Database connected successfully')
+const uri = `mongodb+srv://Alamin:ZnEUylHANPiysG7L@cluster0.scp6egc.mongodb.net/Apollo?retryWrites=true&w=majority`
 
-    server.listen(config.port || 8000, () => {
-      console.log(`Application listening on port ${config.port || 8000}`)
+export const connectWithDB = () => {
+  mongoose
+    .connect(uri, options)
+    .then(() => {
+      console.log('database connection succesfull')
     })
-  } catch (err) {
-    console.error('Failed to connect to database', err)
-    process.exit(1)
-  }
+    .catch((err: any) => {
+      console.error(err)
+    })
 }

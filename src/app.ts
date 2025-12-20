@@ -6,7 +6,7 @@ import httpStatus from 'http-status'
 import routes from './app/routes/index'
 import globalErrorHandler from './errors/globalErrorHandler'
 
-import { databaseConnect } from './helpers/dbConnect'
+import { connectWithDB } from './helpers/dbConnect'
 
 const app = express()
 const server = http.createServer(app)
@@ -98,6 +98,12 @@ process.on('SIGTERM', () => {
 // ============================
 // Start Server
 // ============================
-databaseConnect(server)
+connectWithDB()
+// server
+const port = process.env.PORT || 8080
+
+app.listen(port, () => {
+  console.log(`App is running on port ${port}`)
+})
 
 export { app, server }
